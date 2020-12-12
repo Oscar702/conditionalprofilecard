@@ -1,4 +1,5 @@
 import "../style/index.scss";
+import picture from "../style/Profilepic.jpg";
 
 /**
  *  EDIT ONLY INSIDE THIS RENDER FUNCTION
@@ -27,12 +28,17 @@ function render(variables = {}) {
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
-  if (variables.includeCover == false) cover = "<div class='cover'></div>";
+
+  if (variables.includeCover == false) {
+    cover = "<div class='cover different'></div>";
+  }
 
   // reset the website body with the new html output
-  document.querySelector("#widget_content").innerHTML = `<div class="widget">
+  document.querySelector("#widget_content").innerHTML = `<div class="widget" ${
+    variables.includeCover ? null : 'style = "background-color: grey" '
+  }>
             ${cover}
-          <img src="./style/Profilepic.jpg" class="photo" />
+          <img src="${variables.avatarURL}" class="photo" />
           <h1>${variables.name} ${variables.lastname}</h1>
        
          
@@ -57,9 +63,10 @@ window.onload = function() {
     // if includeCover is true the algorithm should
     includeCover: true,
     // this is the url of the image that will used as background for the profile cover
-    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    background:
+      "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/large_jpg/eiffel-tower-in-paris-151-medium.jpg?1564742900",
     // this is the url for the profile avatar
-    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    avatarURL: picture,
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
